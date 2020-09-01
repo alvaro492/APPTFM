@@ -6,21 +6,28 @@ $("#wizard").steps({
     stepsOrientation: "vertical",
     titleTemplate: '<span class="number">#index#</span>',
 	onStepChanging: function (event, currentIndex, newIndex) { 
-	                          // recupelamos el step actual y su valor
-                              let stepName = $("#wizard").steps("getStep", currentIndex);
+	                          // recupelamos el step actual y su valor                            
+							  let stepName = $("#wizard").steps("getStep", currentIndex);
 							  let nameIndex = stepName.content.search("name=") + 6;
 							  // si me devuelve 5 No existe name
 							  if (nameIndex != 5) {
-								  stepName = stepName.content.substr(nameIndex,3);
-								  stepName = stepName.replace('"',"");
-								  let stepValue = $('input[name="'+ stepName +'"]:checked').val();
-								  if (stepValue) {							  
-									setChange(stepName, stepValue); 
-								  } else {
-									return false;
-								  }  
-							  }
-							  return true},
+								
+									stepName = stepName.content.substr(nameIndex,3);
+									stepName = stepName.replace('"',"");
+									let stepValue = $('input[name="'+ stepName +'"]:checked').val();
+	                              if (currentIndex < newIndex) {							
+    								if (stepValue) {							  
+										setChange(stepName, stepValue); 
+									} else {
+										return false;
+									} 									
+								   } else {
+									   $(getVariableName( stepName )).text( "" );  
+								   }	   
+							     }					  
+							  
+			
+							return true},
 	onFinished: function (event, currentIndex) { 
 					getResult();
 				},
@@ -71,7 +78,7 @@ $("#wizard").steps({
 			} else if ( gvStep2 ) {
 				
 			    $("#wizard").steps("insert", 1, gvStep2); 
-				gvStep1 = "";
+				gvStep2 = "";
 				$("#wizard").steps("insert", 2, gvStep3); 
 				gvStep3 = "";
 				$("#wizard").steps("insert", 6, gvStep7); 
