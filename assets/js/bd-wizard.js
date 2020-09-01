@@ -35,9 +35,9 @@ $("#wizard").steps({
         cancel: "Cancel",
         current: "current step:",
         pagination: "Pagination",
-        finish: "Calculate",
-        next: "Next",
-        previous: "Previous",
+        finish: "Calcular",
+        next: "Siguiente",
+        previous: "Anterior",
         loading: "Loading ..."
     }
 });
@@ -118,6 +118,11 @@ $("#wizard").steps({
 
 }
 	
+	
+  $("#about").click(function(){
+    $("#myModal").modal();
+  });
+  
 /* Datos */
  function getVariableName(name) { 
 	return "#" + name; 
